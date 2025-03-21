@@ -15,28 +15,7 @@ sap.ui.define([
             MessageToast.show(sMsg);
         },
         onOpenDialog: function () {
-            var oView = this.getView();
-
-            // create the dialog lazily
-            if (!this.byId("helloDialog")) {
-                // load asynchronous XML fragment
-                Fragment.load({
-                    name: "sap.ui.demo.walkthrough.view.HelloDialog",
-                    controller: this
-                }).then(function (oDialog) {
-                    // connect dialog to the root view of this component (models, lifecycle)
-                    oView.addDependent(oDialog);
-                    this._oDialog = oDialog;
-                    oDialog.open();
-                }.bind(this));
-            } else {
-                this.byId("helloDialog").open();
-            }
-        },
-        onCloseDialog: function () {
-            if (this._oDialog) {
-                this._oDialog.close();
-            }
+            this.getOwnerComponent().openHelloDialog();
         }
     })
 });
