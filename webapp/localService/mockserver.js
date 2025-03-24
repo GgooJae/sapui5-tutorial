@@ -1,4 +1,4 @@
-ap.ui.define([
+sap.ui.define([
     "sap/ui/core/util/MockServer",
     "sap/base/util/UriParameters"
 ], function (MockServer, UriParameters) {
