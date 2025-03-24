@@ -2,8 +2,9 @@ sap.ui.define([
     "sap/ui/core/UIComponent",
     "sap/ui/model/json/JSONModel",
     "sap/ui/model/resource/ResourceModel",
-    "./controller/HelloDialog"
-], function (UIComponent, JSONModel, ResourceModel, HelloDialog) {
+    "./controller/HelloDialog",
+    "sap/ui/Device"
+], function (UIComponent, JSONModel, ResourceModel, HelloDialog, Device) {
     "use strict";
     return UIComponent.extend("sap.ui.demo.walkthrough.Component", {
         metadata: {
@@ -20,10 +21,17 @@ sap.ui.define([
             };
             var oModel = new JSONModel(oData);
             this.setModel(oModel);
-         // set dialog
-         this._helloDialog = new HelloDialog(this.getRootControl());
-         // create the views based on the url/hash
-         this.getRouter().initialize();
+
+            // set device model
+            var oDeviceModel = new JSONModel(Device);
+            oDeviceModel.setDefaultBindingMode("OneWay");
+            this.setModel(oDeviceModel, "device");
+
+            // set dialog
+            this._helloDialog = new HelloDialog(this.getRootControl());
+
+            // create the views based on the url/hash
+            this.getRouter().initialize();
         },
 
         exit: function () {
